@@ -4,7 +4,7 @@ import 'package:sqflite/sqflite.dart';
 // ignore: depend_on_referenced_packages
 import 'package:path/path.dart';
 
-import '../google_book_service.dart';
+import '../servives/google_book_service.dart';
 
 class PersonalBookDatabase {
   static const String _tableName = "bookTable";
