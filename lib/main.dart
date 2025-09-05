@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'dashboard.dart';
+
 void main() {
   runApp(const Grimorio());
 }
@@ -12,7 +14,7 @@ class Grimorio extends StatelessWidget {
     return MaterialApp(
       title: "Grimório",
       theme: ThemeData.dark(useMaterial3: true),
-      home: Container(),
+      home: const Dashboard(),
     );
   }
 }
