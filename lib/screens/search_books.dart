@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'display_text.dart';
-import 'servives/google_book_service.dart';
-import 'primary_button.dart';
-import 'theme.dart';
+import 'components/display_text.dart';
+import '../servives/google_book_service.dart';
+import 'components/primary_button.dart';
+import '../theme.dart';
 
 class SearchBooks extends StatefulWidget {
   const SearchBooks({super.key});

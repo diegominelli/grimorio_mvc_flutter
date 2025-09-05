@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import 'theme.dart';
+import '../../theme.dart';
 
 class DisplayText extends StatelessWidget {
   const DisplayText(this.text, {super.key});

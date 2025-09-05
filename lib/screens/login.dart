@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import 'display_text.dart';
+import 'components/display_text.dart';
 import 'home.dart';
-import 'primary_button.dart';
+import 'components/primary_button.dart';
 import 'sign_up.dart';
-import 'theme.dart';
+import '../theme.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});

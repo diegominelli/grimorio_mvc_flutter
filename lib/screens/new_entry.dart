@@ -1,39 +1,25 @@
 import 'package:flutter/material.dart';
-
-import '../theme.dart';
-import 'date_input.dart';
-import 'display_text.dart';
+import 'components/date_input.dart';
+import 'components/display_text.dart';
 // ignore: unused_import
-import 'entry.dart';
-import 'primary_button.dart';
+import 'components/entry.dart';
+import 'components/primary_button.dart';
+import '../theme.dart';
 
-class EditDetails extends StatefulWidget {
-  const EditDetails({super.key});
+import 'home.dart';
+
+class NewEntry extends StatefulWidget {
+  const NewEntry({super.key});
 
   @override
-  State<EditDetails> createState() => _EditDetailsState();
+  State<NewEntry> createState() => _NewEntryState();
 }
 
-class _EditDetailsState extends State<EditDetails> {
+class _NewEntryState extends State<NewEntry> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController initialDateController = TextEditingController();
   final TextEditingController finalDateController = TextEditingController();
   final TextEditingController commentsController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    // Fill with book info
-    // if(widget.book.comments != ""){
-    //   commentsController.text = widget.book.comments;
-    // }
-    // if(widget.book.dayStarted != ""){
-    //   initialDateController.text = widget.book.dayStarted;
-    // }
-    // if(widget.book.dayFinished != ""){
-    //   finalDateController.text = widget.book.dayFinished;
-    // }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,13 +34,17 @@ class _EditDetailsState extends State<EditDetails> {
               children: <Widget>[
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 32.0),
-                  child: DisplayText("Editando o Livro"),
+                  child: DisplayText("Adicionando um Livro"),
                 ),
                 SizedBox(
                   width: 244,
                   child: Column(
                     children: <Widget>[
-                      // Entry(book: "book"),
+                      // Entry(book: "Book"),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 24.0),
+                        child: Text("Book Description"),
+                      ),
                       Form(
                         key: _formKey,
                         child: Column(
@@ -88,9 +78,17 @@ class _EditDetailsState extends State<EditDetails> {
                             Padding(
                               padding: const EdgeInsets.only(bottom: 40.0),
                               child: PrimaryButton(
-                                text: "Salvar",
+                                text: "Adicionar",
                                 onTap: () {
-                                  // Navigator.pop(context, "Updated book");
+                                  // Needs add book logic
+
+                                  Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const Home(),
+                                    ),
+                                    (_) => false,
+                                  );
                                 },
                               ),
                             ),

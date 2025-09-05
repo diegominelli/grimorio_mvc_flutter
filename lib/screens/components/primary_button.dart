@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import 'theme.dart';
+import '../../theme.dart';
 
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton({super.key, required this.text, required this.onTap});

@@ -4,8 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import '../theme.dart';
 // ignore: unused_import
 import 'book_details.dart';
-import 'display_text.dart';
-import 'floating_button.dart';
+import 'components/display_text.dart';
+import 'components/floating_button.dart';
 import 'search_books.dart';
 
 class Home extends StatefulWidget {

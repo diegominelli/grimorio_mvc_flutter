@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:grimorio_mvc_flutter/theme.dart';
 
 import 'login.dart';
-import 'primary_button.dart';
+import 'components/primary_button.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});
