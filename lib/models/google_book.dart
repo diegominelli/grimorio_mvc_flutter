@@ -26,7 +26,7 @@ class GoogleBook {
       ? "https://placehold.co/200x290.png"
       : map["volumeInfo"]["imageLinks"]?["thumbnail"];
   validateDescription(Map<String, dynamic> map) =>
-      description = map["volumeInfo"]["description"] == null
+      map["volumeInfo"]["description"] == null
       ? "Sem descrição"
       : map["volumeInfo"]["description"];
 
