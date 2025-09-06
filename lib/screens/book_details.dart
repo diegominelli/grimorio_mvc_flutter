@@ -10,7 +10,7 @@ import 'edit_details.dart';
 import 'home.dart';
 
 class BookDetails extends StatefulWidget {
-  BookDetails({super.key});
+  const BookDetails({super.key});
 
   @override
   State<BookDetails> createState() => _BookDetailsState();

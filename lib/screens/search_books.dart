@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:grimorio_mvc_flutter/models/google_book.dart';
+import 'package:grimorio_mvc_flutter/servives/google_book_service.dart';
 
 import 'components/display_text.dart';
-import '../servives/google_book_service.dart';
 import 'components/primary_button.dart';
 import '../theme.dart';
 
@@ -15,7 +16,7 @@ class SearchBooks extends StatefulWidget {
 class _SearchBooksState extends State<SearchBooks> {
   final GoogleBooksService googleBooksService = GoogleBooksService();
   // Need to change list type
-  Future<List<dynamic>>? booksList;
+  Future<List<GoogleBook>>? booksList;
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +42,9 @@ class _SearchBooksState extends State<SearchBooks> {
                     child: TextFormField(
                       onChanged: (value) {
                         // Populate list of books from API
-                        // setState(() {
-                        //   booksList = googleBooksService.searchBooks(value);
-                        // });
+                        setState(() {
+                          booksList = googleBooksService.searchBooks(value);
+                        });
                       },
                       decoration: InputDecorationProperties.newInputDecoration(
                         "Procure por título/autor(a)",
@@ -90,98 +91,110 @@ class _BooksList extends StatelessWidget {
 
           case ConnectionState.done:
             if (snapshot.hasData || snapshot.data != []) {
-              return SliverList.builder(
-                itemBuilder: (context, index) => InkWell(
-                  onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => Dialog(
-                        insetPadding: const EdgeInsets.all(16),
-                        clipBehavior: Clip.hardEdge,
-                        shape: ModalDecorationProperties.modalBorder,
-                        child: SingleChildScrollView(
-                          child: Container(
-                            padding: const EdgeInsets.all(32.0),
-                            decoration: ModalDecorationProperties.boxDecoration,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 16.0),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: <Widget>[
-                                      InkWell(
-                                        child: const Icon(Icons.close),
-                                        onTap: () {
-                                          Navigator.pop(context);
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.only(bottom: 24.0),
-                                  child: DisplayText("Detalhes do Livro"),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 16.0),
-                                  child: Image.network(
-                                    snapshot.data![index].thumbnailLink,
-                                    height: 220,
-                                    width: 144,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 8.0),
-                                  child: Text(
-                                    snapshot.data![index].title,
-                                    style: ModalDecorationProperties.bookTitle,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 16.0),
-                                  child: SizedBox(
-                                    width: double.maxFinite,
-                                    child: Text(
-                                      snapshot.data![index].authors,
-                                      style:
-                                          ModalDecorationProperties.bookAuthor,
+              return SliverList(
+                delegate: SliverChildBuilderDelegate((context, index) {
+                  final book = snapshot.data![index];
+                  return InkWell(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => Dialog(
+                          insetPadding: const EdgeInsets.all(16),
+                          clipBehavior: Clip.hardEdge,
+                          shape: ModalDecorationProperties.modalBorder,
+                          child: SingleChildScrollView(
+                            child: Container(
+                              padding: const EdgeInsets.all(32.0),
+                              decoration:
+                                  ModalDecorationProperties.boxDecoration,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      bottom: 16.0,
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: <Widget>[
+                                        InkWell(
+                                          child: const Icon(Icons.close),
+                                          onTap: () {
+                                            Navigator.pop(context);
+                                          },
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 24.0),
-                                  child: Text(
-                                    snapshot.data![index].description,
-                                    maxLines: 4,
-                                    overflow: TextOverflow.ellipsis,
+                                  const Padding(
+                                    padding: EdgeInsets.only(bottom: 24.0),
+                                    child: DisplayText("Detalhes do Livro"),
                                   ),
-                                ),
-                                PrimaryButton(
-                                  text: "Adicionar livro",
-                                  onTap: () {
-                                    // Need a googleBook instance
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) => NewEntry(
-                                    //               googleBook:
-                                    //                   snapshot.data![index],
-                                    //             )));
-                                  },
-                                ),
-                              ],
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      bottom: 16.0,
+                                    ),
+                                    child: Image.network(
+                                      snapshot.data![index].thumbnailLink,
+                                      height: 220,
+                                      width: 144,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 8.0),
+                                    child: Text(
+                                      snapshot.data![index].title,
+                                      style:
+                                          ModalDecorationProperties.bookTitle,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      bottom: 16.0,
+                                    ),
+                                    child: SizedBox(
+                                      width: double.maxFinite,
+                                      child: Text(
+                                        snapshot.data![index].authors,
+                                        style: ModalDecorationProperties
+                                            .bookAuthor,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      bottom: 24.0,
+                                    ),
+                                    child: Text(
+                                      snapshot.data![index].description,
+                                      maxLines: 4,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
+                      );
+                    },
+                    child: Card(
+                      color: Colors.transparent,
+                      elevation: 0,
+                      margin: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: ListTile(
+                        leading: Image.network(
+                          book.thumbnailLink,
+                          width: 70,
+                          fit: BoxFit.cover,
+                        ),
+                        title: Text(book.title),
+                        subtitle: Text(book.authors),
                       ),
-                    );
-                  },
-                  // child: Entry(book: snapshot.data![index]),
-                ),
-                itemCount: snapshot.data!.length,
+                    ),
+                  );
+                }, childCount: snapshot.data!.length),
               );
             }
             break;

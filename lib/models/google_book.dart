@@ -22,10 +22,9 @@ class GoogleBook {
   }
 
   validateThumbnail(Map<String, dynamic> map) =>
-      thumbnailLink = map["volumeInfo"]["imageLinks"]?["thumbnail"] == null
-      ? "https://placehold.co/200x290"
+      map["volumeInfo"]["imageLinks"]?["thumbnail"] == null
+      ? "https://placehold.co/200x290.png"
       : map["volumeInfo"]["imageLinks"]?["thumbnail"];
-
   validateDescription(Map<String, dynamic> map) =>
       description = map["volumeInfo"]["description"] == null
       ? "Sem descrição"
