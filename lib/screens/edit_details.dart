@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grimorio_mvc_flutter/models/personal_book.dart';
 
 import '../theme.dart';
 import 'components/date_input.dart';
@@ -8,7 +9,9 @@ import 'components/entry.dart';
 import 'components/primary_button.dart';
 
 class EditDetails extends StatefulWidget {
-  const EditDetails({super.key});
+  EditDetails({super.key, required this.personalBook});
+
+  PersonalBook personalBook;
 
   @override
   State<EditDetails> createState() => _EditDetailsState();
@@ -24,15 +27,15 @@ class _EditDetailsState extends State<EditDetails> {
   void initState() {
     super.initState();
     // Fill with book info
-    // if(widget.book.comments != ""){
-    //   commentsController.text = widget.book.comments;
-    // }
-    // if(widget.book.dayStarted != ""){
-    //   initialDateController.text = widget.book.dayStarted;
-    // }
-    // if(widget.book.dayFinished != ""){
-    //   finalDateController.text = widget.book.dayFinished;
-    // }
+    if (widget.personalBook.comments != "") {
+      commentsController.text = widget.personalBook.comments;
+    }
+    if (widget.personalBook.dayStarted != "") {
+      initialDateController.text = widget.personalBook.dayStarted;
+    }
+    if (widget.personalBook.dayFinished != "") {
+      finalDateController.text = widget.personalBook.dayFinished;
+    }
   }
 
   @override
@@ -54,7 +57,7 @@ class _EditDetailsState extends State<EditDetails> {
                   width: 244,
                   child: Column(
                     children: <Widget>[
-                      // Entry(book: "book"),
+                      Entry(googleBook: widget.personalBook.googleBook),
                       Form(
                         key: _formKey,
                         child: Column(
